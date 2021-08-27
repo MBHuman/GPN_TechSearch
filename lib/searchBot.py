@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
+
+
 '''
 
 Источники информации:
@@ -86,6 +88,31 @@ class SearchEngine(object):
 
         self.split_to_search_blocks(search)
 
+    def search_with_yandex_api(self):
+        '''
+            Algo:
+
+            search with
+
+        '''
+
+
+
+    def analyse(self):
+
+        pass
+
+    def get_objects(self, search):
+        '''
+            Return all sorted object for needle GPN
+        '''
+        self.corrector_basic(search) # turn info info lists for esay use
+
+        self.search_with_yandex_api()
+        self.search_in_our_db()
+        self.analyse()
+
+        # return
 
 
 if __name__ == '__main__':

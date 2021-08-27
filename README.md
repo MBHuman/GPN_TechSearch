@@ -15,3 +15,11 @@ Main advantages of SearchEngine:
 How to run project:
 * `python3 -m venv env` for use venv
 * `python3 app.py` for run app
+
+Used instruments:
+
+* Yandex MapsAPI
+* Selenium SearchRobot
+* Flask
+* Python
+* Bulma
