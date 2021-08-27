@@ -87,7 +87,6 @@ class SearchEngine(object):
         self.split_to_search_blocks(search)
 
 
-# search = requests.post('')
 
 if __name__ == '__main__':
     engine = SearchEngine()
