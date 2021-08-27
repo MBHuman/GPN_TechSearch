@@ -13,5 +13,5 @@ Main advantages of SearchEngine:
 * Simple
 
 How to run project:
-* `npm install` from react_part
-* `npm start` after first step
+* `python3 -m venv env` for use venv
+* `python3 app.py` for run app
