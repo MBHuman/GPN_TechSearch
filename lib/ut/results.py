@@ -15,3 +15,4 @@ class Result(object):
         self.mail = mail
         self.category = category
         self.address = address
+

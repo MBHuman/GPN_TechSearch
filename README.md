@@ -13,7 +13,7 @@ Main advantages of SearchEngine:
 * Simple
 
 How to run project:
-* `python3 -m venv env` for use venv
+* `source env/bin/activate` for use venv
 * `python3 app.py` for run app
 
 Used instruments:
