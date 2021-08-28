@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 
 
 
@@ -117,7 +117,7 @@ class SearchEngine(object):
 
 if __name__ == '__main__':
     engine = SearchEngine()
-    word = 'name для работы с 25W OR fire OR кобальт AND новый 12D уренгой AND <<раскопки>> | Раскопки новые |'
+    word = 'name для работы с 25W OR fire OR кобальт AND новый 12D уренгой AND <<раскопки>> | Раскопки новые'
     engine.corrector_basic(word)
     print(engine.search_parts)
     print(engine.search_conditions)

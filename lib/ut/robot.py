@@ -1,5 +1,7 @@
 import json
 import requests
+from ut.results import Result
+from ut.elastic_interaction import Elastic
 # from selenium import webdriver
 #
 class ConnectionStructure(object):
@@ -18,13 +20,11 @@ class ConnectionStructure(object):
 class Robot(object):
 
     def __init__(self, yandex_api_key=None):
-        self.connection_data = ConnectionStructure(host='localhost',
-                                                   database='std_1455_gpn',
-                                                   user='std_1455_gpn',
-                                                   password='12345678')
+        self.set_keys()
 
         self.yandex_api_key = yandex_api_key
         self.search_keys = self.get_keys()
+        self.elastic = Elastic()
 
     def join_strings(self, string):
         if(not isinstance(string, list) and not isinstance(string, str)):
@@ -33,8 +33,38 @@ class Robot(object):
             return ', '.join(string)
         return string
 
+    def get_results_yandex_api(self, json_data):
+        json_data = json_data['features']
+        results = []
+        for i in range(len(json_data)):
+            cur_feature = json_data[i]['properties']
+
+            temp = Result()
+            temp.name = self.join_strings(cur_feature['name'])
+            temp.mail = None
+            temp.address = self.join_strings(cur_feature['CompanyMetaData']['address'])
+            temp.description = cur_feature['description']
+
+            categories = []
+            for cat in cur_feature['CompanyMetaData']['Categories']:
+                categories.append(cat['name'])
+
+            temp.category = self.join_strings(categories)
+            if 'url' in cur_feature['CompanyMetaData']:
+                temp.link = cur_feature['CompanyMetaData']['url']
+
+            phones = []
+            if 'Phones' in cur_feature['CompanyMetaData']:
+                for phone in cur_feature['CompanyMetaData']['Phones']:
+                    phones.append(phone['formatted'])
+
+            temp.phone = self.join_strings(phones)
+
+            results.append(temp)
+        return results
+
     def get_keys(self):
-        with open('./lib/search_keys.json') as file:
+        with open('./ut/jsons/search_keys.json') as file:
             data = json.loads(file.read())
         if not data:
             raise Exception('Не заполнен search_keys.json. Сделайте set_keys()')
@@ -42,7 +72,7 @@ class Robot(object):
 
     def set_keys(self):
 
-        open('search_keys.json', 'w').close()
+        open('./ut/jsons/search_keys.json', 'w').close()
 
         search = {
             'types': [
@@ -158,15 +188,16 @@ class Robot(object):
                 }
             ]
         }
-        with open('search_keys.json', 'w') as file:
+        with open('./ut/jsons/search_keys.json', 'w') as file:
             json.dump(search, file)
 
     def start_bot(self):
         self.get_info_yandex_maps()
+
         # while (True):
 
 
-    def get_info_yandex_maps(self):
+    def get_info_yandex_maps(self, search):
         '''
             Информация по API взята с этой страницы
             https://yandex.ru/dev/maps/geosearch/doc/concepts/about.html
@@ -175,15 +206,57 @@ class Robot(object):
         if not self.yandex_api_key:
             raise Exception('API ключ не предоставлен')
 
-        search_query = f'https://search-maps.yandex.ru/v1/?text=Машиностроение&type=geo&lang=ru_RU&type=biz&apikey={self.yandex_api_key}'
+        search_query = f'https://search-maps.yandex.ru/v1/?text={search}&type=geo&lang=ru_RU&type=biz&results=500&apikey={self.yandex_api_key}'
         req = requests.get(search_query)
 
-        self.json_data = req.json()
+        return req.json()
 
+    '''
     def get_json_data_from_yandex(self):
         if not self.json_data:
             raise Exception('Сделайте запрос заддных через get_info_yandex_maps')
         return self.json_data
+    '''
+    def add_to_elastic_res(self, result):
+
+        for element in result:
+            doc = {
+                "name": element.name,
+                "address": element.address,
+                "emails": element.mail,
+                "phones": element.phone,
+                "url": element.link,
+                "description": element.description,
+                "additional_info": "",
+                "categories": element.category
+            }
+            self.elastic.insert_document(doc)
+
+    def load_data_into_elastic(self):
+
+        with open('./ut/jsons/search_keys.json') as file:
+            main_themes = json.loads(file.read())
+
+        for theme in main_themes['types']:
+            block = theme['attributes']
+
+            for elem in block:
+                search_string = elem['name']
+
+                if 'additionally' in elem:
+                    advanced_search_string = search_string
+                    for add in elem['additionally']:
+                        advanced_search_string += '+'+add['name']
+
+                        data = self.get_info_yandex_maps(advanced_search_string)
+                        result = self.get_results_yandex_api(data)
+
+                        self.add_to_elastic_res(result)
+
+                else:
+                    data = self.get_info_yandex_maps(search_string)
+                    result = self.get_results_yandex_api(data)
+                    self.add_to_elastic_res(result)
 
     def find_info_from_webpage(self):
         pass

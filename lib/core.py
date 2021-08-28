@@ -1,4 +1,4 @@
-import mysql.connector
+from lib.ut.robot import Robot
 
 class StringConverter(object):
 
@@ -64,6 +64,7 @@ class SpeedSearcher(object):
         '''
 
         self.converted_string = StringConverter(search_string)
+        self.robot = Robot()
 
 
     def analyse(self):

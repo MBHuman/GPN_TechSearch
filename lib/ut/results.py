@@ -1,13 +1,13 @@
 class Result(object):
 
     def __init__(self,
-                 name=None,
-                 link=None,
-                 description=None,
-                 phone=None,
-                 mail=None,
-                 category=None,
-                 address=None):
+                 name='',
+                 link='',
+                 description='',
+                 phone='',
+                 mail='',
+                 category='',
+                 address=''):
         self.name = name
         self.link = link
         self.description = description
