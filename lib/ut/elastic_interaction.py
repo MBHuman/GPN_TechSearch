@@ -28,17 +28,17 @@ class Elastic(object):
         #         }
         #     }
         # }
-        resp = requests.get(url=self.ELASTIC_SEARCH_URL + "_search", data=json.dumps(params), verify="./root.crt",
+        resp = requests.get(url=self.ELASTIC_SEARCH_URL + "_search", data=json.dumps(params), verify="./lib/ut/root.crt",
                             auth=HTTPBasicAuth(self.LOGIN, self.PASSWORD), headers=self.headers)
         return resp.json()
 
     def insert_document(self, doc):
-        resp = requests.post(url=self.ELASTIC_SEARCH_URL + self.INDEX_NAME + "/_doc", data=json.dumps(doc), verify="./ut/root.crt",
+        resp = requests.post(url=self.ELASTIC_SEARCH_URL + self.INDEX_NAME + "/_doc", data=json.dumps(doc), verify="./lib/ut/root.crt",
                              auth=HTTPBasicAuth(self.LOGIN, self.PASSWORD), headers=self.headers)
         print(resp.text)
 
     def delete_index(self):
-        resp = requests.delete(url=self.ELASTIC_SEARCH_URL + self.INDEX_NAME, verify="./root.crt",
+        resp = requests.delete(url=self.ELASTIC_SEARCH_URL + self.INDEX_NAME, verify="./lib/root.crt",
                                auth=HTTPBasicAuth(self.LOGIN, self.PASSWORD),
                                headers=self.headers)
         print(resp)

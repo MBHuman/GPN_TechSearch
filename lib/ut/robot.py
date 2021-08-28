@@ -1,7 +1,7 @@
 import json
 import requests
-from ut.results import Result
-from ut.elastic_interaction import Elastic
+from lib.ut.results import Result
+from lib.ut.elastic_interaction import Elastic
 # from selenium import webdriver
 #
 class ConnectionStructure(object):
@@ -25,6 +25,26 @@ class Robot(object):
         self.yandex_api_key = yandex_api_key
         self.search_keys = self.get_keys()
         self.elastic = Elastic()
+
+    def get_results_from_elastic(self, search):
+        results = self.elastic.get_results(search)
+
+        returns = []
+        # print(results['hits']['hits'])
+        for elem in results['hits']['hits']:
+            res = Result()
+            res.name = elem['_source']['name']
+            res.link = elem['_source']['url']
+            res.description = elem['_source']['description']
+            res.phone = elem['_source']['phones']
+            res.mail = elem['_source']['emails']
+            res.category = elem['_source']['categories']
+            res.address = elem['_source']['address']
+
+            returns.append(res)
+
+        return returns
+
 
     def join_strings(self, string):
         if(not isinstance(string, list) and not isinstance(string, str)):
@@ -64,7 +84,7 @@ class Robot(object):
         return results
 
     def get_keys(self):
-        with open('./ut/jsons/search_keys.json') as file:
+        with open('./lib/ut/jsons/search_keys.json') as file:
             data = json.loads(file.read())
         if not data:
             raise Exception('Не заполнен search_keys.json. Сделайте set_keys()')
@@ -72,7 +92,7 @@ class Robot(object):
 
     def set_keys(self):
 
-        open('./ut/jsons/search_keys.json', 'w').close()
+        open('./lib/ut/jsons/search_keys.json', 'w').close()
 
         search = {
             'types': [
@@ -188,7 +208,7 @@ class Robot(object):
                 }
             ]
         }
-        with open('./ut/jsons/search_keys.json', 'w') as file:
+        with open('./lib/ut/jsons/search_keys.json', 'w') as file:
             json.dump(search, file)
 
     def start_bot(self):
@@ -234,7 +254,7 @@ class Robot(object):
 
     def load_data_into_elastic(self):
 
-        with open('./ut/jsons/search_keys.json') as file:
+        with open('./lib/ut/jsons/search_keys.json') as file:
             main_themes = json.loads(file.read())
 
         for theme in main_themes['types']:

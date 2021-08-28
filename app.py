@@ -20,8 +20,10 @@ def index():
 def search():
     robot = Robot()
 
-    error, words, results = None, request.args.get('search_field'), robot.get_results()
+    error, words = None, request.args.get('search_field')
 
+    results = robot.get_results_from_elastic(words)
+    # print(results)
     if(len(results) == 0):
         error = "По вашему запросу ничего не найдено"
     return( render_template('results.html', words=words, error=error, results=results))
