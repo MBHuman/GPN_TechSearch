@@ -26,6 +26,9 @@ def search():
     # print(results)
     if(len(results) == 0):
         error = "По вашему запросу ничего не найдено"
+    elif isinstance(results, str):
+        error = results
+        results = []
     return( render_template('results.html', words=words, error=error, results=results))
 
 @app.route('/info')

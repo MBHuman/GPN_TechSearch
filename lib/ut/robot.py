@@ -2,8 +2,13 @@ import json
 import requests
 from lib.ut.results import Result
 from lib.ut.elastic_interaction import Elastic
-# from selenium import webdriver
-#
+import time
+import random
+import re
+import networkx as nx
+from threading import Thread
+from selenium import webdriver
+
 class ConnectionStructure(object):
 
     def __init__(self,
@@ -16,6 +21,40 @@ class ConnectionStructure(object):
         self.user = user
         self.password = password
 
+class RobotExtention(object):
+
+    def __init__(self, page_object):
+        self.page_object = page_object
+
+    def set_random_time_sleep(self):
+        time.sleep(random.gauss(2, 1))
+
+    def is_yandex_search_page(self):
+        if self.page_object.current_url.find('https://yandex.ru/search/') == -1:
+            return False
+        return True
+
+    def is_yandex_capcha_page(self):
+        if self.page_object.current_url.find('https://yandex.ru/showcaptcha') == -1:
+            return False
+        return True
+
+    def close_yandex_capcha(self):
+        if self.is_yandex_capcha_page():
+            self.page_object.find_element_by_class_name('CheckboxCaptcha-Anchor').click()
+
+    def get_next_page(self):
+        if not self.is_yandex_page():
+            raise Exception('Not yandex page')
+
+        next_button = self.page_object.find_element_by_class_name('pager__item_kind_next')
+        next_button.click()
+
+    def get_serps_on_page(self):
+        return self.page_object.find_elements_by_class_name('serp-item')
+
+
+
 
 class Robot(object):
 
@@ -25,9 +64,74 @@ class Robot(object):
         self.yandex_api_key = yandex_api_key
         self.search_keys = self.get_keys()
         self.elastic = Elastic()
+        self.patternDistance = re.compile(r"(?P<Distance> \s?[0-9])[d|w]", re.VERBOSE)
+        self.plusSignReplace = re.compile(r"(?P<PlusSign> \S*)\+", re.VERBOSE)
+
+    def is_valid_block(self, search):
+        if search.find('[') == -1 and search.find(']') == -1:
+            return (True, 0)
+
+        if search.count('[') == 1 and search.count(']') == 1:
+            if search[0] == '[' and search[-1] == ']':
+                return (True, 1)
+
+        if search.count('[') == 2 and search.count(']') == 2:
+            if search[0] == '[' and search[-1] == ']':
+                if search[search.find(']') + 1] == '[':
+                    return (True, 2)
+
+        return (False, 0)
+
+    def transform_to_common(self, search):
+
+        validation = self.is_valid_block(search)
+
+        common = ''
+        not_criteria = ''
+
+        if validation[0]:
+            if validation[1] == 0:
+                common += search
+            else:
+                left = 0
+                for char in search:
+                    if char == '[':
+                        left += 1
+                    elif left <= 1 and char != ']':
+                        common += char
+                    elif left >= 1 and char != ']':
+                        not_criteria += char
+            return (common, not_criteria)
+        return (common, not_criteria)
+
+
+    def query_translator(self, common, not_criteria):
+        """translate GPN to elasticsearch query.
+            1. nD and nW to ~n . Но выдачу собственно надо будет смотреть по релевантности выдачи по этим параметрам
+            2. Заменяем + на * в конце слова
+        """
+        result = ""
+        com_temp = ""
+        not_criteria_temp = ""
+        if common:
+            com_temp = self.patternDistance.sub("~\g<Distance>", common)
+            com_temp = self.plusSignReplace.sub("\g<PlusSign>*", com_temp)
+            result = com_temp
+
+        if not_criteria:
+            not_criteria_temp = self.patternDistance.sub("~\g<Distance>", not_criteria)
+            not_criteria_temp = self.plusSignReplace.sub("\g<PlusSign>*", not_criteria_temp)
+            result = com_temp + " AND NOT ( " + not_criteria_temp + ")"
+        return result
 
     def get_results_from_elastic(self, search):
+        commons = self.transform_to_common(search)
+        search = self.query_translator(commons[0], commons[1])
+
         results = self.elastic.get_results(search)
+        if 'status' in results:
+            if results['status'] != 200:
+                return 'Введите данные от Yandex Cloud в elastic_interaction.py'
 
         returns = []
         # print(results['hits']['hits'])
@@ -44,7 +148,6 @@ class Robot(object):
             returns.append(res)
 
         return returns
-
 
     def join_strings(self, string):
         if(not isinstance(string, list) and not isinstance(string, str)):
@@ -287,3 +390,4 @@ class Robot(object):
 
     def search_web(self):
         pass
+

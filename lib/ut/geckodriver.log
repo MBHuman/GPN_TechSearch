@@ -1,0 +1,157 @@
+1630187576114	geckodriver	INFO	Listening on 127.0.0.1:56168
+1630187577116	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/bm/1pzzc38j3pq712tfc1qbg__m0000gn/T/rust_mozprofileMkuQKR"
+1630187586211	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/bm/1pzzc38j3pq712tfc1qbg__m0000gn/T/rust_mozprofileMkuQKR/search.json.mozlz4", (void 0)))
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1630187590025	Marionette	INFO	Listening on port 56180
+1630187591169	geckodriver	INFO	Listening on 127.0.0.1:56211
+1630187592181	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/bm/1pzzc38j3pq712tfc1qbg__m0000gn/T/rust_mozprofilefWsvle"
+1630187592682	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/bm/1pzzc38j3pq712tfc1qbg__m0000gn/T/rust_mozprofilefWsvle/search.json.mozlz4", (void 0)))
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1630187595601	Marionette	INFO	Listening on port 56226
+1630187595747	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1630187605545	Marionette	INFO	Stopped listening on port 56226
+JavaScript error: resource:///modules/Interactions.jsm, line 209: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1630187609493	Marionette	INFO	Stopped listening on port 56180
+JavaScript error: resource:///modules/Interactions.jsm, line 209: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+1630187612627	geckodriver	INFO	Listening on 127.0.0.1:56302
+1630187613641	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/bm/1pzzc38j3pq712tfc1qbg__m0000gn/T/rust_mozprofileXsbbix"
+1630187614177	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/bm/1pzzc38j3pq712tfc1qbg__m0000gn/T/rust_mozprofileXsbbix/search.json.mozlz4", (void 0)))
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1630187616333	Marionette	INFO	Listening on port 56313
+1630187616438	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: services.settings: 
+  main/doh-providers Signature failed  InvalidSignatureError: Invalid content signature (main/doh-providers)
+console.error: services.settings: 
+  main/doh-providers local data was corrupted
+console.warn: services.settings: main/doh-providers Signature verified failed. Retry from scratch
+console.error: services.settings: 
+  main/doh-config Signature failed  InvalidSignatureError: Invalid content signature (main/doh-config)
+console.error: services.settings: 
+  main/doh-config local data was corrupted
+console.warn: services.settings: main/doh-config Signature verified failed. Retry from scratch
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PClientManager::Msg_ExpectFutureClientSource Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PClientManager::Msg_ForgetFutureClientSource Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+console.warn: "Resource  of root-node was not found."
+console.error: (new TypeError("currentNode is null", "resource://devtools/client/inspector/shared/style-change-tracker.js", 66))
+TypeError: currentNode is null: canMutationImpactCurrentStyles@resource://devtools/client/inspector/shared/style-change-tracker.js:66:20
+onMutations@resource://devtools/client/inspector/shared/style-change-tracker.js:84:41
+_emit@resource://devtools/shared/event-emitter.js:226:34
+emit@resource://devtools/shared/event-emitter.js:172:18
+emit@resource://devtools/shared/event-emitter.js:324:18
+getMutations@resource://devtools/client/fronts/walker.js:311:10
+
+console.error: "Error while calling actor 'pagestyle's method 'getApplied'" "node is null"
+console.error: (new TypeError("node is null", "resource://devtools/server/actors/page-style.js", 570))
+console.warn: "Resource  of root-node was not found."
+console.warn: "Resource  of root-node was not found."
+console.error: (new TypeError("currentNode is null", "resource://devtools/client/inspector/shared/style-change-tracker.js", 66))
+TypeError: currentNode is null: canMutationImpactCurrentStyles@resource://devtools/client/inspector/shared/style-change-tracker.js:66:20
+onMutations@resource://devtools/client/inspector/shared/style-change-tracker.js:84:41
+_emit@resource://devtools/shared/event-emitter.js:226:34
+emit@resource://devtools/shared/event-emitter.js:172:18
+emit@resource://devtools/shared/event-emitter.js:324:18
+getMutations@resource://devtools/client/fronts/walker.js:311:10
+
+1630189975892	Marionette	INFO	Stopped listening on port 56313
+JavaScript error: resource:///modules/Interactions.jsm, line 209: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIUserIdleService.removeIdleObserver]
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1630195144598	geckodriver	INFO	Listening on 127.0.0.1:63039
+1630195144616	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/bm/1pzzc38j3pq712tfc1qbg__m0000gn/T/rust_mozprofileLi5Fif"
+1630195145126	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/bm/1pzzc38j3pq712tfc1qbg__m0000gn/T/rust_mozprofileLi5Fif/search.json.mozlz4", (void 0)))
+console.error: BackgroundUpdate: 
+  _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 243"  data: no]
+1630195147991	Marionette	INFO	Listening on port 63048
+1630195148049	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 487: TypeError: window.content is null
+JavaScript error: chrome://browser/content/browser-gestureSupport.js, line 509: TypeError: window.content is null
+console.error: services.settings: 
+  main/doh-providers Signature failed  InvalidSignatureError: Invalid content signature (main/doh-providers)
+console.error: services.settings: 
+  main/doh-providers local data was corrupted
+console.warn: services.settings: main/doh-providers Signature verified failed. Retry from scratch
+console.error: services.settings: 
+  main/doh-config Signature failed  InvalidSignatureError: Invalid content signature (main/doh-config)
+console.error: services.settings: 
+  main/doh-config local data was corrupted
+console.warn: services.settings: main/doh-config Signature verified failed. Retry from scratch
+1630195606728	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:238:19
+TimedPromise@chrome://remote/content/marionette/sync.js:223:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1630195623470	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:238:19
+TimedPromise@chrome://remote/content/marionette/sync.js:223:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+console.log: WebExtensions: reset-default-search: starting.
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+Handler function threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:814:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:699:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+Handler function threw an exception: TypeError: topFrame.browsingContext is null
+Stack: matchRequest@resource://devtools/server/actors/network-monitor/network-observer.js:126:9
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:814:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:699:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 126, column: 9
+console.error: (new TypeError("topFrame.browsingContext is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 126))
+console.warn: "Resource  of root-node was not found."
+console.error: "Tried to send a 'target-destroyed-form' event on an already destroyed actor 'watcher'"

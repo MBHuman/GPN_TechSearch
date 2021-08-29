@@ -23,3 +23,4 @@ Used instruments:
 * Flask
 * Python
 * Bulma
+* NetworkX

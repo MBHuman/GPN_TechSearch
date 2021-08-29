@@ -7,11 +7,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-  <div class="block search_field" style="margin: 20px;">
+  <div class="block search_field" style="margin: 20px; display: flex; flex-wrap: wrap;">
     <form action="search" method="get" style="width: 60%; display: flex; flex-direction: row;">
       <input class="input" type="text" placeholder="Введите запрос..." name="search_field" value="{{words}}">
       <input class="button is-link" type="submit" value="Искать">
     </form>
+    <a class="block" href="/">
+      <button class="button is-info">Вернуться на главную</button>
+    </a>
   </div>
   <div class="results">
     {% if error %}
@@ -27,7 +30,7 @@
         </p>
         <a href="{{ elements.link }}">
           <p class="subtitle">
-            Ссылка
+            Сайт компании
           </p>
         </a>
       </div>
