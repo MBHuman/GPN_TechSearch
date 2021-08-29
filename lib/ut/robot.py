@@ -8,6 +8,7 @@ import re
 import networkx as nx
 from threading import Thread
 from selenium import webdriver
+import pandas as pd
 
 class ConnectionStructure(object):
 
@@ -66,6 +67,27 @@ class Robot(object):
         self.elastic = Elastic()
         self.patternDistance = re.compile(r"(?P<Distance> \s?[0-9])[d|w]", re.VERBOSE)
         self.plusSignReplace = re.compile(r"(?P<PlusSign> \S*)\+", re.VERBOSE)
+
+    def get_csv(self, result):
+
+        dataFrame = pd.DataFrame(columns=['name', 'url','description','phone','mail','category','address'])
+
+        for res in result:
+            dataFrame = dataFrame.append({
+                'name': res.name,
+                'url': res.link,
+                'description': res.description,
+                'phones': res.phone,
+                'mail': res.mail,
+                'category': res.category,
+                'address': res.address
+            }, ignore_index=True)
+
+        dataFrame.to_csv('static/first.csv')
+
+        return 'static/first.csv'
+
+
 
     def is_valid_block(self, search):
         if search.find('[') == -1 and search.find(']') == -1:

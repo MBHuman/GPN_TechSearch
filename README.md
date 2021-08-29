@@ -1,8 +1,6 @@
 <img src=https://reg.gpn-techchallenge.ru/assets/images/side.png width=200 />
 
-[Website]() |
-[Documentation]() |
-[Run]()
+[Website](http://178.154.255.17:5000/)
 
 Project for GPN Tech.Challenge
 -----------
@@ -23,5 +21,6 @@ Used instruments:
 * Flask
 * Python
 * Bulma
+* Pandas
 * NetworkX
 * Gensim

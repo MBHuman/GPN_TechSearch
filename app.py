@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from lib.ut.robot import Robot
 
 app = Flask(__name__)
+
+results = []
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -30,6 +32,12 @@ def search():
         error = results
         results = []
     return( render_template('results.html', words=words, error=error, results=results))
+
+@app.route('/download')
+def download():
+    robot = Robot()
+    robot.get_csv(results)
+    return send_file('static/first.csv', attachment_filename='first.csv')
 
 @app.route('/info')
 def info():
