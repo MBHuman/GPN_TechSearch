@@ -5,10 +5,11 @@ from lib.ut.elastic_interaction import Elastic
 import time
 import random
 import re
+import csv
 import networkx as nx
 from threading import Thread
 from selenium import webdriver
-import pandas as pd
+
 
 class ConnectionStructure(object):
 
@@ -21,6 +22,7 @@ class ConnectionStructure(object):
         self.database = database
         self.user = user
         self.password = password
+
 
 class RobotExtention(object):
 
@@ -55,8 +57,6 @@ class RobotExtention(object):
         return self.page_object.find_elements_by_class_name('serp-item')
 
 
-
-
 class Robot(object):
 
     def __init__(self, yandex_api_key=None):
@@ -70,24 +70,22 @@ class Robot(object):
 
     def get_csv(self, result):
 
-        dataFrame = pd.DataFrame(columns=['name', 'url','description','phone','mail','category','address'])
-
-        for res in result:
-            dataFrame = dataFrame.append({
-                'name': res.name,
-                'url': res.link,
-                'description': res.description,
-                'phones': res.phone,
-                'mail': res.mail,
-                'category': res.category,
-                'address': res.address
-            }, ignore_index=True)
-
-        dataFrame.to_csv('static/first.csv')
+        with open('./static/first.csv', 'w', newline='') as file:
+            fieldnames = ['name', 'url', 'description', 'phone', 'mail', 'category', 'address']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            for res in result:
+                writer.writerow({
+                    'name': res.name,
+                    'url': res.link,
+                    'description': res.description,
+                    'phones': res.phone,
+                    'mail': res.mail,
+                    'category': res.category,
+                    'address': res.address
+                })
 
         return 'static/first.csv'
-
-
 
     def is_valid_block(self, search):
         if search.find('[') == -1 and search.find(']') == -1:
@@ -125,7 +123,6 @@ class Robot(object):
                         not_criteria += char
             return (common, not_criteria)
         return (common, not_criteria)
-
 
     def query_translator(self, common, not_criteria):
         """translate GPN to elasticsearch query.
@@ -172,9 +169,9 @@ class Robot(object):
         return returns
 
     def join_strings(self, string):
-        if(not isinstance(string, list) and not isinstance(string, str)):
+        if (not isinstance(string, list) and not isinstance(string, str)):
             raise Exception('Not string')
-        if(isinstance(string, list)):
+        if (isinstance(string, list)):
             return ', '.join(string)
         return string
 
@@ -341,7 +338,6 @@ class Robot(object):
 
         # while (True):
 
-
     def get_info_yandex_maps(self, search):
         '''
             Информация по API взята с этой страницы
@@ -362,6 +358,7 @@ class Robot(object):
             raise Exception('Сделайте запрос заддных через get_info_yandex_maps')
         return self.json_data
     '''
+
     def add_to_elastic_res(self, result):
 
         for element in result:
@@ -391,7 +388,7 @@ class Robot(object):
                 if 'additionally' in elem:
                     advanced_search_string = search_string
                     for add in elem['additionally']:
-                        advanced_search_string += '+'+add['name']
+                        advanced_search_string += '+' + add['name']
 
                         data = self.get_info_yandex_maps(advanced_search_string)
                         result = self.get_results_yandex_api(data)
@@ -409,7 +406,5 @@ class Robot(object):
     def make_webpage_graph(self):
         pass
 
-
     def search_web(self):
         pass
-

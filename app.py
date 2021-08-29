@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, send_file
+import pickle
 from lib.ut.robot import Robot
+
 
 app = Flask(__name__)
 
@@ -18,7 +20,7 @@ def index():
 
     return( render_template('index.html'))
 
-@app.route('/search', methods=['GET'])
+@app.route('/search', methods=['GET','POST'])
 def search():
     robot = Robot()
 
@@ -33,10 +35,11 @@ def search():
         results = []
     return( render_template('results.html', words=words, error=error, results=results))
 
-# @app.route('/download')
+# @app.route('/download', methods=['POST', 'GET'])
 # def download():
 #     robot = Robot()
-#     robot.get_csv(results)
+#     res = session.get('results')
+#     robot.get_csv(res)
 #     return send_file('static/first.csv', attachment_filename='first.csv')
 
 @app.route('/info')
