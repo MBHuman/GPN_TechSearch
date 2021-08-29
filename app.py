@@ -33,14 +33,12 @@ def search():
     elif isinstance(results, str):
         error = results
         results = []
+    robot.get_csv(results)
     return( render_template('results.html', words=words, error=error, results=results))
 
-# @app.route('/download', methods=['POST', 'GET'])
-# def download():
-#     robot = Robot()
-#     res = session.get('results')
-#     robot.get_csv(res)
-#     return send_file('static/first.csv', attachment_filename='first.csv')
+@app.route('/download', methods=['POST', 'GET'])
+def download():
+    return send_file('static/first.csv', attachment_filename='first.csv', as_attachment=True)
 
 @app.route('/info')
 def info():

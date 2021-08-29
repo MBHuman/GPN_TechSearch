@@ -71,7 +71,7 @@ class Robot(object):
     def get_csv(self, result):
 
         with open('./static/first.csv', 'w', newline='') as file:
-            fieldnames = ['name', 'url', 'description', 'phone', 'mail', 'category', 'address']
+            fieldnames = ['name', 'url', 'description', 'phones', 'mail', 'category', 'address']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
             for res in result:
