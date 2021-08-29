@@ -33,11 +33,11 @@ def search():
         results = []
     return( render_template('results.html', words=words, error=error, results=results))
 
-@app.route('/download')
-def download():
-    robot = Robot()
-    robot.get_csv(results)
-    return send_file('static/first.csv', attachment_filename='first.csv')
+# @app.route('/download')
+# def download():
+#     robot = Robot()
+#     robot.get_csv(results)
+#     return send_file('static/first.csv', attachment_filename='first.csv')
 
 @app.route('/info')
 def info():
