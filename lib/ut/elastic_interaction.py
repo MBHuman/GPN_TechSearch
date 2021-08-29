@@ -13,7 +13,7 @@ class Elastic(object):
         self.INDEX_NAME = "gpn_01"
         self.headers = {"Content-Type": "application/json"}
 
-    def get_results(self, query):
+    def get_results(self, query, size=100):
         params = {
             "query": {
                 "query_string": {
@@ -21,16 +21,22 @@ class Elastic(object):
                 }
             }
         }
+        size_param = str(size)
+        resp = requests.get(url=self.ELASTIC_SEARCH_URL + "_search?size=" + size_param, data=json.dumps(params),
+                            verify="./lib/ut/root.crt",
+                            auth=HTTPBasicAuth(self.LOGIN, self.PASSWORD), headers=self.headers)
+        return resp.json()
+
         # params = {
-        #     'query': {
-        #         'match': {
-        #             'query': query
+        #     "query": {
+        #         "query_string": {
+        #             "query": query
         #         }
         #     }
         # }
-        resp = requests.get(url=self.ELASTIC_SEARCH_URL + "_search", data=json.dumps(params), verify="./lib/ut/root.crt",
-                            auth=HTTPBasicAuth(self.LOGIN, self.PASSWORD), headers=self.headers)
-        return resp.json()
+        # resp = requests.get(url=self.ELASTIC_SEARCH_URL + "_search", data=json.dumps(params), verify="./lib/ut/root.crt",
+        #                     auth=HTTPBasicAuth(self.LOGIN, self.PASSWORD), headers=self.headers)
+        # return resp.json()
 
     def insert_document(self, doc):
         resp = requests.post(url=self.ELASTIC_SEARCH_URL + self.INDEX_NAME + "/_doc", data=json.dumps(doc), verify="./lib/ut/root.crt",
@@ -38,7 +44,7 @@ class Elastic(object):
         print(resp.text)
 
     def delete_index(self):
-        resp = requests.delete(url=self.ELASTIC_SEARCH_URL + self.INDEX_NAME, verify="./lib/root.crt",
+        resp = requests.delete(url=self.ELASTIC_SEARCH_URL + self.INDEX_NAME, verify="./lib/ut/root.crt",
                                auth=HTTPBasicAuth(self.LOGIN, self.PASSWORD),
                                headers=self.headers)
         print(resp)

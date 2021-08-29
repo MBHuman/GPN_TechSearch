@@ -24,3 +24,4 @@ Used instruments:
 * Python
 * Bulma
 * NetworkX
+* Gensim
