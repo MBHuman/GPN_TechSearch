@@ -36,9 +36,9 @@ def search():
     robot.get_csv(results)
     return( render_template('results.html', words=words, error=error, results=results))
 
-@app.route('/download', methods=['POST', 'GET'])
-def download():
-    return send_file('static/first.csv', attachment_filename='first.csv', as_attachment=True)
+# @app.route('/download', methods=['POST', 'GET'])
+# def download():
+#     return send_file('static/first.csv', as_attachment=True)
 
 @app.route('/info')
 def info():
